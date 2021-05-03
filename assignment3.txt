@@ -1,0 +1,410 @@
+Name:-kiran mahadev tidke
+Emailed:-kirantidke2013@gmail.com
+Assignment 3
+For loop
+1)	Write a program that takes a command line arguments n and print a table of power 2 that are less than or equal to 2^n
+Sol:-
+#! /bin/bash
+read -p "enter the number:-" num
+for (( out=2; out<=num; out++))
+do
+        power=$(( 2**$out ))
+        echo "2" "^" $out "=" $power
+done
+
+o/p:-
+$ ./power.sh
+enter the number:-9
+2 ^ 2 = 4
+2 ^ 3 = 8
+2 ^ 4 = 16
+2 ^ 5 = 32
+2 ^ 6 = 64
+2 ^ 7 = 128
+2 ^ 8 = 256
+2 ^ 9 = 512
+
+2)	Write a program that takes a command line argument n and print the nth harmonic no.harmonic no is of the form hn=1/1+1/2+1/3+1/4……+1/n
+Sol:-
+#! /bin/bash
+read -p "enter num=" num
+for (( count=1; count<=num; count++ ))
+do
+        printf 1/$count
+        printf "+"
+done
+
+o/p:-
+$ ./harmonic.sh
+enter num=7
+1/1+1/2+1/3+1/4+1/5+1/6+1/7
+3)	Write a program that takes a input and determine if the no is prime
+Sol:-
+#! /bin/bash
+read -p "enter the lower number:-" num
+flag=0
+for (( counter=2; counter<num; counter++ ))
+do
+        if [ $(( num%counter )) -eq 0 ]
+        then
+                break
+        fi
+done
+if [ $num -eq $counter ]
+then
+     echo "prime no"
+else
+     echo "not prime"
+fi
+     
+  
+
+o/p:-
+enter the lower number:-11
+prime no
+
+$ ./prim.sh
+enter the lower number:-12
+not prime
+
+4)	Extend a program to take a range of number as input and output the prime no in that range
+Sol:-
+#! /bin/bash
+read -p "enter a lower limit=" lower_limit
+read -p "enter a upper limit=" upper_limit
+for (( ocounter=lower_limit; ocounter<=upper_limit; ocounter++ ))
+do
+
+for (( icounter=2;icounter<=ocounter;icounter++ ))
+do
+        if [ $((ocounter%icounter)) -eq 0 ]
+        then
+                break
+        fi
+done
+if [ $ocounter -eq $icounter ]
+then
+echo $ocounter
+fi
+
+done
+
+o/p:-
+$ ./primlimit1.sh
+enter a lower limit=10
+enter a upper limit=20
+11
+13
+17
+19
+
+5)	Write a program to compute a factorial of a number taken as input 5!=1*2*3*4*5
+Sol:-
+#! /bin/bash
+read -p "enter the number=" num
+fact=1
+for (( count=1; count<=num; count++ ))
+do
+        fact=$(( fact*count ))
+done
+echo "factorial is=" $fact
+
+o/p:-
+$ ./fact.sh
+enter the number=5
+factorial is= 120
+
+6)	Write a program to compute factors of a no n using prime factorization method
+Sol:-
+#! /bin/bash
+read -p "enter a number" number
+for(( count=2; number>1; count++))
+do
+
+        while [ $((number%count)) -eq 0 ]
+        do
+        echo $count
+        number=$((number/count))
+        done
+done
+o/p:-
+$ ./primfactor.sh
+enter a number12
+2
+2
+3
+
+
+While loop
+1)	Write a program that takes a command line argument n and print a table of the power of 2 that are less than or equal to 2^n till 256 is reached
+Sol:-
+#! /bin/bash
+read -p "enter the number=" num
+count=0
+limit=256
+while [ $count -lt $num -a $((2**count)) -le $limit ]
+do
+        power=$(( 2**$count ))
+        echo "2" "^" $count "=" $power
+        count=$(( count+1 ))
+done
+
+o/p:-
+$ ./powerwhile.sh
+enter the number=40
+2 ^ 0 = 1
+2 ^ 1 = 2
+2 ^ 2 = 4
+2 ^ 3 = 8
+2 ^ 4 = 16
+2 ^ 5 = 32
+2 ^ 6 = 64
+2 ^ 7 = 128
+2 ^ 8 = 256
+
+
+
+2)	Extend the flip coin problem till either heads or tails winn 11 times
+sol:--
+#! /bin/bash
+count=0
+while [ $count -lt 11 ]
+do
+coinflip=$(( RANDOM%2 ))
+if [ $coinflip -eq 0 ]
+        then
+        echo "heads"
+        count1=$((count1+1))
+        else
+        echo "tails"
+        count2=$((count2+1))
+        fi
+count=$(( count+1 ))
+done
+echo "number of heads " $count1
+echo "number of tails " $count2
+echo "total count " $count
+
+o/p:-
+$ ./coin20.sh
+heads
+heads
+heads
+heads
+heads
+heads
+heads
+tails
+heads
+heads
+tails
+number of heads  9
+number of tails  2
+total count  11
+
+3)	Write a program where a gambler start with rs 100 and place rupee 1 bet until he goes broke i.,e no more money to gambler or reaches the goal of rs 200.keep track of number of times won and no of bets made.
+Sol:-
+#! /bin/bash
+rs=100
+limit=200
+count=0
+bets=0
+while [ $rs -gt 0 -a $rs -lt $limit ]
+do
+        gambler=$(( RANDOM%2 ))
+        if [ $gambler -eq 0 ]
+        then
+                echo "heads"
+                rs=$(( $rs+1 ))
+                echo $rs
+                count=$(( $count+1 ))
+                echo "Number of times won" $count
+        else
+                echo "tails"
+                rs=$(( $rs-1 ))
+                echo $rs
+        fi
+bets=$(( $bets+1 ))
+echo "number of bets" $bets
+done
+
+number of bets 4645
+heads
+198
+Number of times won 2372
+number of bets 4646
+heads
+199
+Number of times won 2373
+number of bets 4647
+tails
+198
+number of bets 4648
+heads
+199
+Number of times won 2374
+number of bets 4649
+tails
+198
+number of bets 4650
+heads
+199
+Number of times won 2375
+number of bets 4651
+heads
+200
+Number of times won 2376
+number of bets 4652
+
+Functions
+1)	Help user find degF or degC based on their conversion selection.use case stmt and ensure that the input are within the freezing point(0C/32F)and the boiling point of water ( 100 C/212 F)
+a)	degF=(degC*9/5)+32
+b)	degC=(degF-32)*5/9
+sol:-
+#! /bin/bash
+function tempF()
+{
+        degF=$(( (degC*9/5)+32 ))
+        echo $degF
+}
+function tempC()
+{
+        degC=$(( (degF-32)*5/9 ))
+        echo $degC
+}
+read -p "enter temprature in celcius:-" temp1
+read -p "enter temprature in Fared:-" temp2
+read -p "enter choice:-" choice
+case $choice in
+        1)
+                if [ $temp1 -gt 0 -a $temp1 -lt 100 ]
+                then
+                        tempfared=$(tempF $temp1)
+                        echo "temprature in fared=" $tempfared "F"
+                else
+                        echo "invalid"
+                fi
+        ;;
+        2)
+                if [ $temp2 -gt 32 -a $temp2 -lt 212 ]
+                then
+                        tempcel=$(tempC $temp2)
+                echo "temprature in celcius is=" $tempcel "C"
+                else
+                        echo "invalid"
+                fi
+        ;;
+        *)
+                echo "invalid choice"
+esac
+
+o/p:-
+$ ./tempconversion.sh
+enter temprature in celcius:-43
+enter temprature in Fared:-77
+enter choice:-1
+temprature in fared= 32 F
+
+
+2)	Write a function to check if the two numbers are palindromes
+Sol:-
+#! /bin/bash
+function palindromes(){
+num=$1
+num1=$2
+limit=10
+count=0
+while [ $num -gt 0 -a $count -lt $limit ]
+do
+        if [ $(( $num )) -ge 0 ]
+        then
+                count=$(( num%10 ))
+                rev=$(( rev *10 + count ))
+                num=$(( num/10 ))
+        fi
+done
+        if [ $(( rev )) -eq $2 ]
+        then
+                echo "palindrome"
+        else
+                echo "not palindrome"
+        fi
+}
+
+read -p "Enter a Number1-" num1
+read -p "Enter a number2-" num2
+pali=$( palindromes $num1 $num2)
+echo "palindrom or Not=" $pali
+
+o/p
+$ ./palindromnew.sh
+Enter a Number1-102
+Enter a number2-201
+palindrom or Not= palindrome
+
+
+
+3)	Take a number from user and check if the numbers is a prime then show that its palindrome is also prime
+a)	Write a function check if number is prime
+b)	Write function to get the palindrome
+c)	Check if the palindrome number is also prim
+Sol:-
+#! /bin/bash
+function prim_no()
+{
+        flag=0
+        num=$1
+        for (( counter=2; counter<num; counter++ ))
+do
+        if [ $(( n%counter )) -eq 0 ]
+        then
+                break
+        fi
+done
+if [ $n -eq $counter ]
+then
+     echo "prime no"
+else
+     echo "not prime"
+fi
+
+}
+function pali_no()
+{
+num1=$1
+limit=10
+count=0
+while [ $num1 -gt 0 -a $count -lt $limit ]
+do
+        if [ $(( $num1 )) -ge 0 ]
+        then
+                count=$(( num1%10 ))
+                rev=$(( rev *10 + count ))
+                num1=$(( num1/10 ))
+        fi
+done
+        if [ $(( rev )) -eq $1 ]
+        then
+                echo "palindrome"
+        else
+                echo "not palindrome"
+        fi
+}
+read -p "enter the number=" n
+palindrom=$(pali_no $n)
+echo $palindrom
+prim=$(prim_no $n)
+echo $prim
+
+
+o/p:-
+$ ./paliprim.sh
+enter the number=123
+not palindrome
+not prime
+
+$ ./paliprim.sh
+enter the number=121
+palindrome
+not prime
+
