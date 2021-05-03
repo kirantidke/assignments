@@ -1,0 +1,410 @@
+Name: -Kiran Mahadev Tidke
+Mob no:-7972412776
+Emailed:-kirantidke2013@gmailo.com
+ASSIGNMENT 1
+Q1.print last frequently access urls count in sorted order from /vat/log/httpd/access.log
+Sol :-
+$ cat access.log |awk '{print $7}' | sort | uniq -c | sort -nr | head -4
+
+O/p:-
+    199 /vendor.js
+    199 /scripts.js
+    199 /runtime.js
+    199 /favicon.ico
+
+Q2.print list of 4 frequently access uniq urls at particular hours
+Sol:-
+$ cat access.log | awk -F: '{if($2==06 || $2==07) print $0}' |sort | uniq | sort -nr | head -4
+o/p:-
+
+10.56.9.3 - - [25/Oct/2019:06:32:30 +0000] "GET /robots.txt HTTP/1.1" 200 554 "-" "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "66.249.79.42"
+10.56.9.3 - - [24/Sep/2019:06:03:01 +0000] "GET / HTTP/1.1" 200 554 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36 Google Favicon" "45.113.248.190"
+10.56.9.3 - - [22/Oct/2019:06:08:04 +0000] "GET /ads.txt HTTP/1.1" 200 554 "-" "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "66.249.65.187"
+10.56.9.3 - - [20/Sep/2019:06:34:47 +0000] "GET /assets/icons8-delete%20(1).svg HTTP/1.1" 200 706 "https://fundoopush-dev.bridgelabz.com/dashboard/article" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.75 Safari/537.36" "114.79.180.62"
+
+Q3.  print list of web responcecode count in the uniq sorted order
+c) sort extracted response code and count it
+sol:-
+$ cat access.log |awk '{print $9}' | sort | uniq –c
+o/p:-
+   3176 200
+      8 206
+     26 304
+
+d)print 4 uniq response code count
+sol:-
+$ cat access.log |awk '{print $9}' | sort | uniq -c | head -4
+O/p:-
+   3176 200
+      8 206
+     26 304
+
+Q4. print list of 10 unique sorted client Ip from access.log
+
+a)	View access.log without opening it using editor
+
+b)	Print client Ip address 
+Sol:-
+$ cat access.log |awk '{print $$1}' | sort | uniq | head -10
+o/p:-
+0
+1
+10308375
+1052
+11049751
+1150
+12000023
+1274
+1365450
+13857
+
+
+c)	Sort extracted Ip and count it
+Sol:-
+$ cat access.log |awk '{print $1}' | sort | uniq -c | head -10
+o/p:-
+     33 0
+      4 1
+      1 10308375
+      1 1052
+      1 11049751
+    198 1150
+      5 12000023
+      8 1274
+      1 1365450
+    109 13857
+
+Q.5 data analysis AWK
+i) Print employeeName and TotalPay who has base pay greter than 10000
+sol:-
+$ cat data.csv | awk '{if($4>10000) print $2,$7}'
+o/p:-
+EmployeeName TotalPay
+NATHANIEL 567595
+GARY 538909
+ALBERT 335279
+CHRISTOPHER 332343
+PATRICK 326373
+DAVID 316285
+ALSON 315981
+DAVID 307899
+JOANNE 302377
+PATRICIA 297608
+EDWARD 294580
+
+a)	Read data file ‘data.csv’ from command line and extract rous which have base pay>10000
+Sol:-
+$ cat data.csv | awk '{if($4>10000) print $2 $7}'
+
+o/p:-
+
+EmployeeNameTotalPay
+NATHANIEL567595
+GARY538909
+ALBERT335279
+CHRISTOPHER332343
+PATRICK326373
+DAVID316285
+ALSON315981
+DAVID307899
+JOANNE302377
+PATRICIA297608
+EDWARD294580
+
+a)	Print Employeename and totalpay
+Sol:-
+$ cat data.csv | awk '{print $2 $7}'
+o/p:-
+
+EmployeeNameTotalPay
+NATHANIEL567595
+GARY538909
+ALBERT335279
+CHRISTOPHER332343
+PATRICK326373
+DAVID316285
+ALSON315981
+DAVID307899
+JOANNE302377
+PATRICIA297608
+EDWARD294580
+
+ii)	What is the aggregate total pay of employees whose jobtithe is CAPTAIN
+Sol:-
+
+$ cat data.csv | awk '{if($3=="CAPTAIN") sum+=$7} END {print sum/NR}'
+
+o/p:-
+97649.7
+
+a)	Read data.csv from command line and extract rows which have captain in the column
+Sol:-
+$ cat data.csv | awk '{if($3=="CAPTAIN") print $0}'
+
+o/p:-
+
+2  GARY         CAPTAIN         155966  245131      137811   538909   538909
+3  ALBERT       CAPTAIN         212739  106088      16452    335279   335279
+12 PATRICIA     CAPTAIN         99722   87082       110804   297608   297608
+
+b)	Ectract totalpay and calculate sum print on terminal
+
+Sol:-
+$ cat data.csv | awk '{sum+=$7}{print $7} END {print "sum=" sum}'
+
+O/p:-
+
+TotalPay
+567595
+538909
+335279
+332343
+326373
+316285
+315981
+307899
+302377
+297608
+294580
+sum=3935229
+
+iii)	Print obTitle and OvertimePay who has overtime Pay between 7000 and 10000
+Sol:-
+$ cat data.csv | awk '{if($5>=7000 && $5>10000) print $3 $5}'
+o/p:-
+
+JobTitleOvertimePay
+CAPTAIN245131
+CAPTAIN106088
+MECHANIC56120
+BATTALIONCHIEF89062
+CAPTAIN87082
+
+a)	Read data.csv from command line and extract jobTitle and overtimePay for column value range between 7000-10000
+Sol:-
+$ cat data.csv | awk '{if($0>7000 && $0>=10000) print $3,$5}'
+o/p:-
+
+JobTitle OvertimePay
+DEPUTYDIRECTOR 0
+
+iv)	Print avg basePay
+Sol:-
+
+$ cat data.csv | awk '{sum+=$4} END {print "avg=" sum/NR}'
+o/p:-
+
+avg=157972
+
+a)	Read data file ‘data.csv’from command line and extract basePay value and calculate its avg
+Sol:-
+$ cat data.csv | awk '{sum+=$4}{print $4} END {print "avg=" sum/NR}'
+o/p:-
+BasePay
+167411
+155966
+212739
+77916
+134401
+118602
+92492
+256576
+285262
+99722
+294580
+avg=157972
+
+Q6. move file from one folder to the respective folders
+
+a)	Create files in current directory or any temperory directory  abc.txt,def.txt,ghi.txt,jkl.txt
+o/p:-
+$ touch abc.txt def.txt ghi.txt jkl.txt
+
+
+b)	Print list of files to move
+o/p:-
+
+abc.txt  def.txt  ghi.txt  jkl.txt
+
+c)	Create folder using basename
+
+Sol:-
+
+#! /bin/bash
+for filename in `ls *.txt`
+do
+        foldername=`echo $filename | awk -F. '{print $1}'`
+        mkdir $foldername
+        echo $filename "folder created" $foldername
+done
+
+o/p:-
+$ ./mvfile.sh
+abc.txt folder created abc
+def.txt folder created def
+ghi.txt folder created ghi
+jkl.txt folder created jkl
+
+d)	Move files to newly created folder
+
+Sol:-
+
+#! /bin/bash
+for filename in `ls *.txt`
+do
+        foldername=`echo $filename | awk -F. '{print $1}'`
+        if [ -d $foldername ]
+        then
+                rm -r $foldername
+        fi
+        mkdir $foldername
+        mv $filename $foldername
+        echo $filename "moved to" $foldername
+done
+
+o/p:-
+
+$ ./mvfile.sh
+abc.txt moved to abc
+def.txt moved to def
+ghi.txt moved to ghi
+jkl.txt moved to jkl
+
+Q7. Append current date to all lo files
+
+a)	Create  files with name abc.log.1,def.log.1,ghi.log.1,jkl.log.1,
+mno.log.1
+o/p:-
+
+$ touch abc.log.1 def.log.1. ghi.log.1 jkl.log.1 mno.log.1
+
+b)	Print list of files to rename
+
+$ ls
+abc.log.1  def.log.1.  ghi.log.1  jkl.log.1  mno.log.1
+
+
+c)	Print date command to show in ddmmyy
+Sol:-
+$ nano dt.sh
+
+#! /bin/bash
+dt="$(date)"
+echo "todays date is " $dt
+dt="$(date +'%d/%m/%Y')"
+echo "todays date in ddmmyy format " $dt
+
+
+o/p:-
+
+$ ./dt.sh
+
+todays date is  Fri Apr 23 10:27:09 IST 2021
+todays date in ddmmyy format  23/04/2021
+
+d)	 append date to the log file name
+sol:-
+#! /bin/bash
+for filename in `ls *.log.1`
+do
+	foldername=`echo $filename | awk -F. '{print $1}'`		
+	dt=`echo $filename | awk -F. '{print $2}'`
+	today=`date  +%d-%m-%Y | awk -F- '{print $1$2$3}'`
+	echo $foldername-$today-$dt
+done
+o/p:-
+abc-23042021-log
+def-23042021-log
+ghi-23042021-log
+jkl-23042021-log
+mno-23042021-log
+Q8.check if folder exist or not if its not present create it
+Sol:-
+#!/bin/bash
+if [ -d ~myfolder ]
+then
+        echo "folder exist"
+else
+        echo "folder not exist"
+fi
+mkdir myfolder
+echo "folder created"
+
+op:-
+
+$ ./ch.sh
+folder not exist
+folder created
+
+Q9. Archiev the file from /var/log folder which have modified 7 days ago and move it to ur backup folder
+Sol:-
+
+#! /bin/bash
+mkdir backupfolder
+for file in `ls | find.-mtime -4`
+do
+         mv $file backupfolder
+         echo "file save into backup"
+done
+
+o/p:-
+$ ./kt.sh
+mkdir: cannot create directory ‘bkfolder’: File exists
+mv: cannot move ‘.’ to a subdirectory of itself, ‘bkfolder/.’
+File save into backup
+file save into backup
+mv: cannot stat ‘./backupfolder/backup.sh’: No such file or directory
+file save into backup
+mv: cannot stat ‘./backupfolder/bk.sh’: No such file or directory
+file save into backup
+mv: cannot stat ‘./backupfolder/kt.sh’: No such file or directory
+file save into backup
+mv: cannot stat ‘./backupfolder/stays.sh’: No such file or directory
+file save into backup
+file save into backup
+file save into backup
+
+Q10. Execute command  “hello” and “ls ” and check its execution status and print whether command executed successful or not
+Sol:-
+
+#! /bin/bash
+echo 'hello' $?
+if [ $? -eq 0 ]
+then
+        echo "executed successfully"
+else
+        echo "cmd not executed "
+fi
+echo 'ls' $?
+if [ $? -eq 0 ]
+then
+        echo "cmd executed successfully"
+else
+        echo "cmd not executed"
+fi
+
+o/p:-
+$ ./stays.sh
+hello 0
+executed successfully
+ls 0
+cmd executed successfully
+
+Q11.create a process list table displays processed,parent process id,command name ,%of memory consumption ,%of cpu utilization
+Sol:-
+
+$ ps -elf | awk '{print $2,$3,$6}'
+
+o/p:-
+
+PID PPID COMMAND
+C 1152 11:27:03
+C 1106 11:24:22
+C 1105 11:24:21
+
+
+
+
+
+
+
