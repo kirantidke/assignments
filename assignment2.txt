@@ -1,0 +1,500 @@
+Name:-kiran mahadev tidke
+Mailid:-kirantidke2013@gmail.com
+ASSIGNMENT 2
+1)	Enter 3 numbers do following arithmetic operations  and find the one that is max and min
+1)	a+b*c
+2)	c+a/b
+3)	a%b+c
+4)	a*b+c
+sol:-
+#! /bin/bash
+read -p "enter a=" a
+read -p "enter b=" b
+read -p "enter c=" c
+op1=$(( a+b*c ))
+op2=$(( c+a/b ))
+op3=$(( a%b+c ))
+op4=$(( a*b+c ))
+echo "first operation is =" $op1
+echo "second operation is =" $op2
+echo "third operation is =" $op3
+echo "fourth operation is =" $op4
+if [ $op1 -gt $op2 -a $op1 -gt $op3 -a $op1 -gt $op4 ]
+then
+        echo "first operation is max" $op1
+elif [ $op2 -gt $op1 -a $op2 -gt $op3 -a $op2 -gt $op4 ]
+then
+        echo "second operation is max" $op2
+elif [ $op3 -gt $op1 -a $op3 -gt $op2 -a $op3 -gt $op4 ]
+then
+echo "third operation the is max" $op3
+else
+        echo "fourth operation is max" $op4
+fi
+if [ $op1 -lt $op2 -a $op1 -lt $op3 -a $op1 -lt $op4 ]
+then
+        echo "first op is min" $op1
+elif [ $op2 -lt $op1 -a $op2 -lt $op3 -a $op2 -lt $op4 ]
+then
+        echo "second operation is min" $op2
+elif [ $op3 -lt $op1 -a $op3 -lt $op2 -a $op3 -lt $op4 ]
+then
+        echo "third operation the is min" $op3
+else
+        echo "fourth operation is min" $op4
+
+o/p:-
+$ ./operations1.sh
+
+enter a=8
+enter b=2
+enter c=1
+first operation is = 10
+second operation is = 5
+third operation is = 1
+fourth operation is = 17
+fourth operation is max 17
+third operation the is min 1
+
+2)	use random  function to get single digit 
+sol:-
+#! /bin/bash
+r_val=$(( RANDOM%(2-1)+1 ))
+echo $r_val
+
+op:-
+$ ./randm1.sh
+1
+
+3)	use ranom to get dice no between 1 to 6
+sol:-
+#! /bin/bash
+r_val=$(( RANDOM%(7-1)+1 ))
+echo $r_val
+
+o/p:-
+$ ./randmdic.sh
+5
+$ ./randmdic.sh
+1
+$ ./randmdic.sh
+6
+
+4)	add two random dice no and print the result
+sol:-
+#! /bin/bash
+r_val1=$(( RANDOM%(7-1)+1 ))
+echo "dic1 value" $r_val1
+r_val2=$(( RANDOM%(7-1)+1 ))
+echo "dic2 val" $r_val2
+
+o/p:-
+$ ./randmdic2.sh
+dic1 value 6
+dic2 val 6
+
+$ ./randmdic2.sh
+dic1 value 6
+dic2 val 1
+
+5)	write the program that reads 5 random 2 digit values then find their sum and avg
+sol:-
+#! /bin/bash
+val1=$(( RANDOM%(100-10)+10 ))
+val2=$(( RANDOM%(100-10)+10 ))
+val3=$(( RANDOM%(100-10)+10 ))
+val4=$(( RANDOM%(100-10)+10 ))
+val5=$(( RANDOM%(100-10)+10 ))
+echo $val1
+echo $val2
+echo $val3
+echo $val4
+echo $val5
+sum=$(( val1+val2+val3+val4+val5 ))
+avg=$(( (sum)/5 ))
+echo "sum=" $sum
+echo "avg=" $avg
+
+o/p:-
+$ ./randm5.sh
+64
+15
+10
+96
+62
+sum= 247
+avg= 49
+
+6)	unit conversion
+a)	1ft=12 in then 42 in=?ft
+b)	Rectangular plot of 60 feet * 40 feet in meters
+c)	Calculate area of 25 such plots in acres
+Sol:-
+#! /bin/bash
+feet=$(( 1*12 ))
+echo "1 feet=" $feet "inch"
+inch=$(( 42/12 ))
+echo "42 inch= "$inch "feet"
+area1=$(( (60*40)/3 ))
+echo "area of rectangle=" $area1 "meters"
+area25=$(( 25*((60*40)/43560) ))
+echo "area of 25 rectangles in acre=" $area25 "acre"
+o/p:-
+$ ./uconversions.sh
+1 feet= 12 inch
+42 inch= 3 feet
+area of rectangle= 800 meters
+area of 25 rectangles in acre= 0 acre
+
+
+7)	Write a program that reads 5 random 3 digit value and then outputs the min and max values
+Sol:-
+#! /bin/bash
+val1=$(( RANDOM%(1000-100)+100 ))
+val2=$(( RANDOM%(1000-100)+100 ))
+val3=$(( RANDOM%(1000-100)+100 ))
+val4=$(( RANDOM%(1000-100)+100 ))
+val5=$(( RANDOM%(1000-100)+100 ))
+max="no is"
+echo $val1
+echo $val2
+echo $val3
+echo $val4
+echo $val5
+if [ $val1 -gt $val2 -a $val1 -gt $val3 -a $val1 -gt $val4 -a $val1 -gt $val5  ]
+then
+        echo "max is=" $val1
+        elif [ $val2 -gt $val3 -a $val2 -gt $val4 -a $val2 -gt $val5 ]
+        then
+                echo "max is=" $val2
+                elif [ $val3 -gt $val4 -a $val3 -gt $val4 -a $val3 -gt $val5 ]
+                then
+                        echo "max is=" $val3
+                        elif [ $val4 -gt $val5 ]
+                        then
+                                echo "max is=" $val4
+else
+        echo "max is=" $val5
+fi
+if [ $val1 -lt $val2 -a $val1 -lt $val3 -a $val1 -lt $val4 -a $val1 -lt $val5  ]
+then
+        echo "min is=" $val1
+        elif [ $val2 -lt $val3 -a $val2 -lt $val4 -a $val2 -lt $val5 ]
+        then
+                echo "min is=" $val2
+                elif [ $val3 -lt $val4 -a $val3 -lt $val4 -a $val3 -lt $val5 ]
+                then
+                        echo "min is=" $val3
+                        elif [ $val4 -lt $val5 ]
+                        then
+                                echo "min is=" $val4
+else
+        echo "min is=" $val5
+fi
+
+o/p:-
+$ ./randm33.sh
+619
+781
+503
+901
+904
+max is= 904
+min is= 503
+
+8)	Write a program that takes day and month from the command line and print true if day of month is bet march 20 and june 20 flase otherwise
+Sol:-
+#! /bin/bash
+read -p "enter day and month" ddmm
+if [ $ddmm -gt 203 -a $ddmm -lt 206 ]
+then
+        echo "true"
+else
+        echo "false"
+fi
+
+o/p:-
+./ddmm.sh
+enter day and month204
+true
+./ddmm.sh
+enter day and month193
+false
+
+9)	Write a program that takes a year as input and outputs the year is a leap year or not a leap.a leap year checks 4 digit no divisible by 4 and not 100 unless divisible by 400
+Sol:-
+#! /bin/bash
+read -p "enter year" year
+if [ $(( year % 4 )) -ne 0 ]
+then
+        echo "not leap year"
+        elif [ $(( year % 400 )) -eq 0 ]
+        then
+                echo "leap year"
+                elif [ $(( year % 100 )) -eq 0 ]
+                then
+                        echo "not leap"
+else
+        echo "leap year"
+fi
+
+o/p:-
+./leap.sh
+enter year1992
+leap year
+
+./leap.sh
+enter year2002
+not leap year
+10)	Write a program to simulate a coin flip and print out “heads” or “tails” accordingly
+Sol:-
+	#! /bin/bash
+coinflip=$(( RANDOM%2 ))
+if [ $coinflip -eq 0 ]
+then
+       	 echo "heads"
+else
+        	echo "tails"
+fi	
+
+o/p:-
+$ ./coinflip.sh
+Heads
+$ ./coinflip.sh
+tails
+
+
+11)	Read a single digit no write the no in world
+Sol:-
+#! /bin/bash
+read -p "enter the no" num
+if [[ $num -eq 1 ]]
+then
+        echo "one"
+elif [[ $num -eq 2 ]]
+then
+        echo "two"
+elif [[ $num -eq 3 ]]
+then
+        echo "three"
+elif [[ $num -eq 4 ]]
+then
+        echo "four"
+elif [[ $num -eq 5 ]]
+        then
+        echo "five"
+elif [[ $num -eq 6 ]]
+then
+        echo "six"
+elif    [[ $num -eq 7 ]]
+then
+        echo "seven"
+elif [[ $num -eq 8 ]]
+then
+        echo "eight"
+elif [[ $num -eq 9 ]]
+then
+        echo "nine"
+else
+echo "enter no between 1 to 9"
+fi
+
+o/p:-
+$ ./spell1.sh
+enter the no5
+five
+
+$ ./spell1.sh
+enter the no8
+eight
+
+
+12)	Read a number and display a week day (Sunday,Monday…..)
+Sol:-
+#! /bin/bash
+read -p "enter the no" num
+if [[ $num -eq 1 ]]
+then
+        echo "sunday"
+elif [[ $num -eq 2 ]]
+then
+        echo "mon"
+elif [[ $num -eq 3 ]]
+then
+        echo "tuesday"
+elif [[ $num -eq 4 ]]
+then
+        echo "wed"
+elif [[ $num -eq 5 ]]
+        then
+        echo "thirsday"
+elif [[ $num -eq 6 ]]
+then
+        echo "friday"
+elif    [[ $num -eq 7 ]]
+then
+        echo "saturday"
+else
+echo "enter no between 1 to 7"
+fi
+o/p:-
+$ ./week1.sh
+enter the no3
+tuesday
+13)	Read the to 1,10,100,1000 etc and display unit,ten,hundreds…………..
+Sol:-
+
+ #! /bin/bash
+read -p "enter the no" num
+if [[ $num -eq 1 ]]
+then
+        echo "unit"
+elif [[ $num -eq 10 ]]
+then
+        echo "tens"
+elif [[ $num -eq 100 ]]
+then
+        echo "hundreds"
+elif [[ $num -eq 1000 ]]
+then
+        echo "thousands"
+elif [[ $num -eq 1000 ]]
+        then
+        echo "ten thousands"
+else
+echo "false"
+fi
+
+o/p:-
+./place.sh
+enter the no10
+tens
+
+
+14)	Write a program that takes user inputs and does unit conversion of diff length units
+a)	Feet to inch
+b)	Inch to ffet
+c)	Feet to meter
+d)	Meter to feet
+Sol:-
+#! /bin/bash
+read -p "Enter value " val
+feet=$(( $val*12 ))
+inch=$(( $val/12 ))
+fmeter=$(( $val/3 ))
+meter=$(( $val*3 ))
+echo "feet to inch=" $feet
+echo "inch to feet=" $inch
+echo "feet to meter=" $fmeter
+echo "meeter to feet=" $meter
+
+
+o/p:-
+$ ./conversions1.sh
+Enter value 12
+feet to inch= 144
+inch to feet= 1
+feet to meter= 4
+meeter to feet= 36
+
+switch case
+1)	Read a number and display a week day (Sunday,Monday…..)
+Sol:-
+#! /bin/bash
+read -p "enter no between 1to7:- " num
+case $num in
+1)echo "sunday";;
+2)echo "monday";;
+3)echo "tusday";;
+4)echo "wed";;
+5)echo "thirsday";;
+6)echo "friday";;
+7)echo "saturday";;
+*)echo "enter proper no"
+esac
+
+o/p:-
+$ ./week.sh
+enter no between 1to7:- 3
+tusday
+
+2)	Read the to 1,10,100,1000 etc and display unit,ten,hundreds…………..
+Sol:-
+#! /bin/bash
+read -p "enter no as 1,10,100,1000:- " num
+case $num in
+1)echo "unt";;
+10)echo "tens";;
+100)echo "hundreds";;
+1000)echo "thousands";;
+*)echo "enter proper no"
+esac
+
+o/p:-
+$ ./place1.sh
+enter no as 1,10,100,1000:- 1000
+thousands
+
+3)	Read a single digit no write the no in world
+Sol:-
+#! /bin/bash
+read -p "enter no between 1to9:- " num
+case $num in
+1)echo "one";;
+2)echo "two";;
+3)echo "three";;
+4)echo "four";;
+5)echo "five";;
+6)echo "six";;
+7)echo "seven";;
+8)echo "eight";;
+9)echo "nine";;
+*)echo "enter proper no"
+esac
+
+o/p:-
+$ ./spell.sh
+enter no between 1to9:- 4
+four
+
+15)	Write a program that takes user inputs and does unit conversion of diff length units
+e)	Feet to inch
+f)	Inch to ffet
+g)	Feet to meter
+h)	Meter to feet
+Sol:-
+#! /bin/bash
+read -p "enter the the value to convert :-" val
+read -p "enter the choice as 1 for feet to inch,2 for inch to feet, 3 for feet to meter, 4 for meter to feet:-" choice
+case $choice in
+        1)
+                feet=$(( $val*12 ))
+                echo "feet to inch=" $feet
+
+
+        ;;
+        2)
+                inch=$(( $val/12 ))
+                echo "inch to feet=" $inch
+
+        ;;
+        3)
+                fmeter=$(( $val/3 ))
+                echo "feet to meter=" $fmeter
+
+        ;;
+        4)
+                meter=$(( $val*3 ))
+                echo "meeter to feet=" $meter
+        ;;
+        *)
+                echo "invalid choice"
+        ;;
+esac
+
+o/p:-
+$ ./conversions2.sh
+enter the the value to convert :-12
+enter the choice as 1 for feet to inch, 2 for inch to feet, 3 for feet to meter, 4 for meter to feet:-1
+feet to inch= 144
+
